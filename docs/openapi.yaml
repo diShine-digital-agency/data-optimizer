@@ -1,0 +1,196 @@
+openapi: 3.1.0
+info:
+  title: Dishine Convert API
+  version: "1.0.0"
+  summary: File-to-Markdown / JSON conversion for LLMs.
+  description: |
+    Convert PDF, DOCX, PPTX, XLSX, images, HTML, plain text files and public URLs
+    into LLM-ready Markdown or schema-validated JSON.
+
+    - Free tier: 5 conversions / day, 20 MB file cap.
+    - Pro tier:  500 conversions / rolling 30 days, 100 MB file cap.
+    - Per-IP burst: 30 requests / minute.
+  contact:
+    name: diShine Digital Agency
+    url: https://dishine.it
+    email: security@dishine.it
+  license:
+    name: MIT
+    identifier: MIT
+servers:
+  - url: https://converter.dishine.it/v1
+    description: Hosted production
+  - url: https://{ref}.functions.supabase.co
+    description: Self-hosted Supabase project
+    variables:
+      ref:
+        default: your-project-ref
+security:
+  - BearerAuth: []
+  - {}  # anonymous calls allowed (counted as Free tier)
+paths:
+  /convert:
+    post:
+      operationId: convertFile
+      summary: Convert a file to Markdown or JSON
+      tags: [Conversion]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ConvertFileRequest"
+      responses:
+        "200":
+          description: Conversion successful
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ConvertResponse"
+        "400": { $ref: "#/components/responses/BadRequest" }
+        "403": { $ref: "#/components/responses/Forbidden" }
+        "413": { $ref: "#/components/responses/FileTooLarge" }
+        "415": { $ref: "#/components/responses/UnsupportedFormat" }
+        "422": { $ref: "#/components/responses/Unprocessable" }
+        "429": { $ref: "#/components/responses/RateLimited" }
+        "500": { $ref: "#/components/responses/ServerError" }
+  /fetch-url:
+    post:
+      operationId: fetchUrl
+      summary: Fetch a URL and convert its content to Markdown or JSON
+      tags: [Conversion]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/FetchUrlRequest"
+      responses:
+        "200":
+          description: Conversion successful
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FetchUrlResponse"
+        "400": { $ref: "#/components/responses/BadRequest" }
+        "403": { $ref: "#/components/responses/Forbidden" }
+        "422": { $ref: "#/components/responses/Unprocessable" }
+        "429": { $ref: "#/components/responses/RateLimited" }
+        "500": { $ref: "#/components/responses/ServerError" }
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: "dsh_<prefix>_<secret>"
+      description: |
+        API key issued from Account → API keys. The key is shown once on
+        creation and stored hashed on the server.
+  schemas:
+    Language:
+      type: string
+      enum: [auto, en, fr, it, es, de, pt, nl, ja, zh]
+      default: auto
+    Format:
+      type: string
+      enum: [markdown, json]
+    Tier:
+      type: string
+      enum: [free, pro, admin]
+    Fingerprint:
+      type: string
+      pattern: "^[a-zA-Z0-9_-]{1,64}$"
+    ClientHash:
+      type: string
+      pattern: "^[a-f0-9]{16,64}$"
+    ConvertFileRequest:
+      type: object
+      required: [fileBase64, mimeType, filename, format]
+      properties:
+        fileBase64: { type: string, description: "Base64-encoded file bytes." }
+        mimeType:   { type: string, example: "application/pdf" }
+        filename:   { type: string, example: "invoice.pdf" }
+        format:     { $ref: "#/components/schemas/Format" }
+        language:   { $ref: "#/components/schemas/Language" }
+        fingerprint:{ $ref: "#/components/schemas/Fingerprint" }
+        clientHash: { $ref: "#/components/schemas/ClientHash" }
+    FetchUrlRequest:
+      type: object
+      required: [url, format]
+      properties:
+        url:
+          type: string
+          format: uri
+          example: "https://example.com/article"
+        format:     { $ref: "#/components/schemas/Format" }
+        language:   { $ref: "#/components/schemas/Language" }
+        fingerprint:{ $ref: "#/components/schemas/Fingerprint" }
+        clientHash: { $ref: "#/components/schemas/ClientHash" }
+    ConvertResponse:
+      type: object
+      required: [output, format, tier, model]
+      properties:
+        output: { type: string }
+        format: { $ref: "#/components/schemas/Format" }
+        tier:   { $ref: "#/components/schemas/Tier" }
+        model:  { type: string, example: "gemini-2.5-flash" }
+    FetchUrlResponse:
+      allOf:
+        - $ref: "#/components/schemas/ConvertResponse"
+        - type: object
+          required: [source, finalUrl]
+          properties:
+            source:
+              type: string
+              enum: [firecrawl, basic]
+            finalUrl:
+              type: string
+              format: uri
+    Error:
+      type: object
+      properties:
+        error:   { type: string }
+        message: { type: string }
+        limit:   { type: integer }
+        used:    { type: integer }
+      required: [error]
+  responses:
+    BadRequest:
+      description: Invalid input
+      content:
+        application/json:
+          schema: { $ref: "#/components/schemas/Error" }
+    Forbidden:
+      description: Account blocked
+      content:
+        application/json:
+          schema: { $ref: "#/components/schemas/Error" }
+    FileTooLarge:
+      description: File exceeds the tier cap
+      content:
+        application/json:
+          schema: { $ref: "#/components/schemas/Error" }
+    UnsupportedFormat:
+      description: MIME type or extension not supported
+      content:
+        application/json:
+          schema: { $ref: "#/components/schemas/Error" }
+    Unprocessable:
+      description: Extraction or model output failed
+      content:
+        application/json:
+          schema: { $ref: "#/components/schemas/Error" }
+    RateLimited:
+      description: Burst or quota cap reached
+      headers:
+        Retry-After:
+          description: Seconds to wait before retrying
+          schema: { type: integer }
+      content:
+        application/json:
+          schema: { $ref: "#/components/schemas/Error" }
+    ServerError:
+      description: Upstream failure
+      content:
+        application/json:
+          schema: { $ref: "#/components/schemas/Error" }

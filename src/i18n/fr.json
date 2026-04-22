@@ -1,0 +1,63 @@
+{
+  "nav": {
+    "docs": "Docs",
+    "account": "Compte",
+    "signin": "Se connecter",
+    "cycleLanguage": "Changer de langue"
+  },
+  "home": {
+    "tagline": "Des fichiers en entrée. Du Markdown ou JSON propre en sortie.",
+    "subtagline": "PDF, images, DOCX, PPTX, XLSX et URLs — convertis via un pipeline vision-model.",
+    "dropHint": "Déposez un fichier ici, ou collez une URL",
+    "convert": "Convertir",
+    "format.markdown": "Markdown",
+    "format.json": "JSON",
+    "copy": "Copier",
+    "download": "Télécharger"
+  },
+  "quota": {
+    "remaining": "{{count}} conversions restantes aujourd'hui",
+    "remaining_one": "{{count}} conversion restante aujourd'hui",
+    "exhausted": "Limite journalière atteinte — revenez demain ou passez à Pro."
+  },
+  "errors": {
+    "generic": "Une erreur est survenue. Réessayez.",
+    "quota_exceeded": "Vous avez atteint la limite du jour.",
+    "rate_limited": "Trop de requêtes — patientez un instant.",
+    "file_too_large": "Fichier trop volumineux pour ce palier.",
+    "unsupported_format": "Format non pris en charge.",
+    "extraction_failed": "Impossible de lire ce fichier — corrompu ou protégé par mot de passe."
+  },
+  "docs": {
+    "title": "Dishine Convert — API",
+    "intro": "Deux endpoints, JSON entrant, JSON sortant. Référence complète dans le dépôt."
+  },
+  "account": {
+    "title": "Compte",
+    "signedInAs": "Connecté en tant que {{email}}",
+    "plan": "Plan",
+    "usage": "Utilisation",
+    "apiKeys": "Clés API",
+    "signOut": "Déconnexion"
+  },
+  "auth": {
+    "title": "Se connecter",
+    "email": "Email",
+    "sendLink": "Envoyer le lien magique",
+    "sent": "Consultez votre boîte : le lien de connexion est en route."
+  },
+  "checkout": {
+    "upgrading": "Passage à Pro…",
+    "success": "Vous êtes Pro. Bienvenue.",
+    "cancelled": "Paiement annulé."
+  },
+  "ops": {
+    "title": "Panneau opérateur",
+    "unlock": "Accéder",
+    "password": "Phrase secrète"
+  },
+  "notFound": {
+    "title": "Introuvable",
+    "back": "Retour à l'accueil"
+  }
+}

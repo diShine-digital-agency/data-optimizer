@@ -1,0 +1,63 @@
+{
+  "nav": {
+    "docs": "Docs",
+    "account": "Account",
+    "signin": "Sign in",
+    "cycleLanguage": "Switch language"
+  },
+  "home": {
+    "tagline": "Files in. Clean Markdown or JSON out.",
+    "subtagline": "PDFs, images, DOCX, PPTX, XLSX and URLs — converted with a vision-model pipeline.",
+    "dropHint": "Drop a file here, or paste a URL",
+    "convert": "Convert",
+    "format.markdown": "Markdown",
+    "format.json": "JSON",
+    "copy": "Copy",
+    "download": "Download"
+  },
+  "quota": {
+    "remaining": "{{count}} conversions left today",
+    "remaining_one": "{{count}} conversion left today",
+    "exhausted": "Daily limit reached — come back tomorrow or upgrade to Pro."
+  },
+  "errors": {
+    "generic": "Something went wrong. Try again.",
+    "quota_exceeded": "You've hit today's limit.",
+    "rate_limited": "Too many requests — slow down a moment.",
+    "file_too_large": "File too big for this tier.",
+    "unsupported_format": "Unsupported format.",
+    "extraction_failed": "Couldn't read this file — it may be corrupted or password-protected."
+  },
+  "docs": {
+    "title": "Dishine Convert — API",
+    "intro": "Two endpoints, JSON in, JSON out. Full reference in the repo."
+  },
+  "account": {
+    "title": "Account",
+    "signedInAs": "Signed in as {{email}}",
+    "plan": "Plan",
+    "usage": "Usage",
+    "apiKeys": "API keys",
+    "signOut": "Sign out"
+  },
+  "auth": {
+    "title": "Sign in",
+    "email": "Email",
+    "sendLink": "Send magic link",
+    "sent": "Check your inbox for the sign-in link."
+  },
+  "checkout": {
+    "upgrading": "Upgrading to Pro…",
+    "success": "You're Pro. Welcome.",
+    "cancelled": "Checkout cancelled."
+  },
+  "ops": {
+    "title": "Operator panel",
+    "unlock": "Access",
+    "password": "Passphrase"
+  },
+  "notFound": {
+    "title": "Not found",
+    "back": "Back to home"
+  }
+}

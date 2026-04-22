@@ -1,0 +1,142 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*
+ * Dishine Convert — design tokens.
+ *
+ * Editorial / terminal hybrid. HSL triples live in CSS vars so Tailwind can
+ * compose them via `hsl(var(--token) / <alpha>)`.
+ */
+
+@layer base {
+  :root {
+    --background: 40 30% 98%;
+    --foreground: 220 15% 12%;
+
+    --muted: 40 20% 94%;
+    --muted-foreground: 220 10% 40%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 220 15% 12%;
+
+    --border: 40 15% 88%;
+    --input: 40 15% 88%;
+    --ring: 8 88% 58%;
+
+    --primary: 220 15% 12%;
+    --primary-foreground: 40 30% 98%;
+
+    --secondary: 40 20% 94%;
+    --secondary-foreground: 220 15% 12%;
+
+    --accent: 8 88% 58%; /* electric coral */
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 70% 45%;
+    --destructive-foreground: 0 0% 100%;
+
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 220 15% 8%;
+    --foreground: 40 20% 96%;
+
+    --muted: 220 12% 16%;
+    --muted-foreground: 220 10% 65%;
+
+    --card: 220 14% 12%;
+    --card-foreground: 40 20% 96%;
+
+    --border: 220 12% 22%;
+    --input: 220 12% 22%;
+    --ring: 8 88% 58%;
+
+    --primary: 40 20% 96%;
+    --primary-foreground: 220 15% 8%;
+
+    --secondary: 220 12% 16%;
+    --secondary-foreground: 40 20% 96%;
+
+    --accent: 8 88% 62%;
+    --accent-foreground: 220 15% 8%;
+
+    --destructive: 0 70% 55%;
+    --destructive-foreground: 0 0% 100%;
+  }
+
+  html,
+  body,
+  #root {
+    height: 100%;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: "Inter", ui-sans-serif, system-ui, sans-serif;
+    font-feature-settings: "ss01", "cv11";
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: "Instrument Serif", ui-serif, Georgia, serif;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+  }
+
+  code,
+  pre,
+  .font-mono {
+    font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+  }
+}
+
+/*
+ * Textured backgrounds (paper grain / starfield grain).
+ * Pure CSS, no external assets — so the repo stays light.
+ */
+@layer utilities {
+  .bg-paper-grain {
+    background-image:
+      radial-gradient(
+        circle at 1px 1px,
+        hsl(var(--foreground) / 0.04) 1px,
+        transparent 0
+      );
+    background-size: 14px 14px;
+  }
+
+  .bg-starfield-grain {
+    background-image:
+      radial-gradient(
+        circle at 25% 30%,
+        hsl(var(--accent) / 0.08) 0,
+        transparent 40%
+      ),
+      radial-gradient(
+        circle at 75% 80%,
+        hsl(var(--accent) / 0.06) 0,
+        transparent 45%
+      ),
+      radial-gradient(
+        circle at 1px 1px,
+        hsl(var(--foreground) / 0.03) 1px,
+        transparent 0
+      );
+    background-size:
+      100% 100%,
+      100% 100%,
+      18px 18px;
+  }
+
+  .manuscript-card {
+    @apply relative rounded-lg border border-border bg-card text-card-foreground shadow-sm;
+    background-image: linear-gradient(
+      180deg,
+      hsl(var(--card)) 0%,
+      hsl(var(--muted) / 0.4) 100%
+    );
+  }
+}

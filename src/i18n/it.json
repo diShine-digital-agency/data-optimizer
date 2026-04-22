@@ -1,0 +1,63 @@
+{
+  "nav": {
+    "docs": "Docs",
+    "account": "Account",
+    "signin": "Accedi",
+    "cycleLanguage": "Cambia lingua"
+  },
+  "home": {
+    "tagline": "File in entrata. Markdown o JSON puliti in uscita.",
+    "subtagline": "PDF, immagini, DOCX, PPTX, XLSX e URL — convertiti con una pipeline vision-model.",
+    "dropHint": "Trascina un file qui, oppure incolla un URL",
+    "convert": "Converti",
+    "format.markdown": "Markdown",
+    "format.json": "JSON",
+    "copy": "Copia",
+    "download": "Scarica"
+  },
+  "quota": {
+    "remaining": "{{count}} conversioni disponibili oggi",
+    "remaining_one": "{{count}} conversione disponibile oggi",
+    "exhausted": "Limite giornaliero raggiunto — torna domani o passa a Pro."
+  },
+  "errors": {
+    "generic": "Qualcosa è andato storto. Riprova.",
+    "quota_exceeded": "Hai raggiunto il limite di oggi.",
+    "rate_limited": "Troppe richieste — rallenta un attimo.",
+    "file_too_large": "File troppo grande per questo piano.",
+    "unsupported_format": "Formato non supportato.",
+    "extraction_failed": "Impossibile leggere il file — potrebbe essere corrotto o protetto da password."
+  },
+  "docs": {
+    "title": "Dishine Convert — API",
+    "intro": "Due endpoint, JSON in ingresso, JSON in uscita. Riferimento completo nel repo."
+  },
+  "account": {
+    "title": "Account",
+    "signedInAs": "Connesso come {{email}}",
+    "plan": "Piano",
+    "usage": "Utilizzo",
+    "apiKeys": "Chiavi API",
+    "signOut": "Esci"
+  },
+  "auth": {
+    "title": "Accedi",
+    "email": "Email",
+    "sendLink": "Invia link magico",
+    "sent": "Controlla la casella: ti abbiamo inviato il link per accedere."
+  },
+  "checkout": {
+    "upgrading": "Passaggio a Pro…",
+    "success": "Ora sei Pro. Benvenuto.",
+    "cancelled": "Checkout annullato."
+  },
+  "ops": {
+    "title": "Pannello operatore",
+    "unlock": "Accedi",
+    "password": "Passphrase"
+  },
+  "notFound": {
+    "title": "Non trovato",
+    "back": "Torna alla home"
+  }
+}
