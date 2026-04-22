@@ -1,4 +1,4 @@
-# 📄 Dishine Convert — File to Markdown & JSON for LLMs
+# 📄 Dishine Converter / Data Optimizer — file to Markdown & JSON for LLMs
 
 <div align="center">
 
