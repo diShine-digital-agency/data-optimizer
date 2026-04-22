@@ -1,0 +1,81 @@
+name: Bug report
+description: Something in Dishine Convert is broken or behaves unexpectedly.
+title: "[bug] "
+labels: ["bug", "triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to file a bug. The more specific you are, the faster we can fix it.
+
+        **Security issues: do NOT open a public issue.** Email `security@dishine.it` — see [SECURITY.md](../../SECURITY.md).
+
+  - type: textarea
+    id: summary
+    attributes:
+      label: Summary
+      description: One or two sentences describing the problem.
+      placeholder: "Uploading a .pptx over 30 MB returns 500 instead of converting."
+    validations:
+      required: true
+
+  - type: textarea
+    id: repro
+    attributes:
+      label: Steps to reproduce
+      description: Minimal, ordered steps. If possible, attach a tiny input file.
+      placeholder: |
+        1. Go to the home page
+        2. Drop `sample.pptx` (3 slides, no media)
+        3. Click Convert
+        4. See error toast "something went wrong"
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected vs actual
+      placeholder: |
+        Expected: Markdown output with one "## Slide N" section per slide.
+        Actual: 500 response, edge-function logs show `extraction_failed`.
+    validations:
+      required: true
+
+  - type: dropdown
+    id: tier
+    attributes:
+      label: Tier
+      options:
+        - Free (anonymous or signed-in)
+        - Pro (active subscription)
+        - Self-hosted
+        - Admin / internal
+    validations:
+      required: true
+
+  - type: input
+    id: environment
+    attributes:
+      label: Environment
+      description: Browser + OS, or `curl` version + OS for API use.
+      placeholder: "Firefox 131 on macOS 14.7 / curl 8.6 on Ubuntu 24.04"
+    validations:
+      required: true
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Relevant logs
+      description: Browser console, edge-function logs, or the JSON `error` field.
+      render: shell
+
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Confirmations
+      options:
+        - label: I searched existing issues and didn't find a duplicate.
+          required: true
+        - label: This is NOT a security issue. (Security issues → `security@dishine.it`.)
+          required: true

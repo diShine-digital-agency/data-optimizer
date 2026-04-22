@@ -1,0 +1,54 @@
+name: Feature request
+description: Suggest a new capability or improvement.
+title: "[feature] "
+labels: ["enhancement", "triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for the idea! A good feature request explains the problem first, then proposes a shape.
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+      description: What are you trying to do that's currently awkward or impossible?
+      placeholder: "When I convert long DOCX files, I can't tell which sections came from headings vs body text."
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed solution
+      description: How would you like it to work? Mockups, API shapes, config flags — whatever helps.
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+      description: What else did you look at, and why didn't it fit?
+
+  - type: dropdown
+    id: scope
+    attributes:
+      label: Where does this live?
+      multiple: true
+      options:
+        - Front-end (React SPA)
+        - Edge function (convert-file)
+        - Edge function (fetch-url)
+        - Edge function (ops-unlock)
+        - Database / migrations
+        - API / OpenAPI spec
+        - Docs
+        - Tooling / CI
+
+  - type: checkboxes
+    id: willing
+    attributes:
+      label: Contribution
+      options:
+        - label: I'd be willing to send a PR for this (with guidance).

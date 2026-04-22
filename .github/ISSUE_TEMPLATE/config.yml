@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Security vulnerability
+    url: mailto:security@dishine.it
+    about: Please email us privately — do not open a public issue.
+  - name: Community & support
+    url: https://github.com/dishine/dishine-convert/discussions
+    about: Questions, ideas, show-and-tell. Use Discussions, not issues.

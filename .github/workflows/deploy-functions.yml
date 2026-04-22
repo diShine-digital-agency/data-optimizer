@@ -1,0 +1,35 @@
+name: Deploy edge functions
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "supabase/functions/**"
+      - ".github/workflows/deploy-functions.yml"
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    name: Deploy to Supabase
+    runs-on: ubuntu-latest
+    # Only run on the canonical repo, not forks.
+    if: github.repository_owner == 'dishine'
+    env:
+      SUPABASE_ACCESS_TOKEN: ${{ secrets.SUPABASE_ACCESS_TOKEN }}
+      SUPABASE_PROJECT_REF: ${{ secrets.SUPABASE_PROJECT_REF }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Supabase CLI
+        uses: supabase/setup-cli@v1
+        with:
+          version: latest
+
+      - name: Deploy convert-file
+        run: supabase functions deploy convert-file --project-ref "$SUPABASE_PROJECT_REF" --no-verify-jwt
+
+      - name: Deploy fetch-url
+        run: supabase functions deploy fetch-url --project-ref "$SUPABASE_PROJECT_REF" --no-verify-jwt
+
+      - name: Deploy ops-unlock
+        run: supabase functions deploy ops-unlock --project-ref "$SUPABASE_PROJECT_REF" --no-verify-jwt

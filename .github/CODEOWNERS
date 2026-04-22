@@ -1,0 +1,19 @@
+# CODEOWNERS — GitHub automatically requests review from these handles.
+#
+# Replace @dishine/maintainers with your actual GitHub team or individual
+# handles before pushing. The format is:
+#   <path-pattern>   @owner-or-team
+#
+# See: https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
+
+# Global fallback — every file
+*                   @dishine/maintainers
+
+# Edge functions — require backend review
+supabase/functions/ @dishine/maintainers
+
+# DB schema — require careful review; migrations are one-way
+supabase/migrations/ @dishine/maintainers
+
+# Security policy
+SECURITY.md         @dishine/maintainers
